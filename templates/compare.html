@@ -1,0 +1,142 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic DataGrid - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="/static/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/static/easyui/themes/icon.css">	
+    <script type="text/javascript" src="/static/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/easyui/jquery.easyui.min.js"></script>
+  <link rel="stylesheet" href="/static/layui/css/layui.css"  media="all">
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px; left:50%" ;size="40px"; >
+<legend align="center" >GPH</legend>
+</fieldset>
+
+<ul class="layui-nav">
+  <li class="layui-nav-item" ><a href="/upload">Upload</a></li>
+<li class="layui-nav-item" ><a href="/compare">Compare</a></li>
+
+
+</ul>
+
+<div style='position:relative; top:20px';>
+
+<b>Manufacture Code :</b>
+<input id="cc" name="dept" value="">
+<a id='btn' class='easyui-linkbutton' iconCls='icon-search' >search</a>
+
+</div>
+
+
+<div <div style='position:relative; top:30px';>
+<table id="dg"></table>
+
+</div>
+
+
+<script>
+
+
+$('#cc').combobox({
+    url:'productslist',
+    valueField:'id',
+    textField:'text'
+});
+
+
+
+$(function(){
+    $('#btn').bind('click', function(){
+		item=$('#cc').val();
+		
+
+$('#dg').datagrid({
+	type: "get",
+	 dataType: 'jsonp',
+    url:'/data.json000/'+item,
+	rowStyler:function(index,row){ 
+			
+		   	   
+	   },
+	
+	
+    columns:[[
+		{field:'Mancode',title:'Mancode',width:100},
+		{field:'GHPCode',title:'GHPCode',width:100},
+		{field:'Description',title:'Description'},
+		{field:'price',title:'GHPPrice',width:100},
+
+		{field:'price1',title:'AmazonPrice',width:100,align:'right',
+		styler:function(value,row,index){
+
+
+
+
+
+if (row.col1=='red')
+{
+    return 'background-color:#FFF3EE;color:red'
+}
+else
+{
+    return 'background-color:#F0FFF0;color:green'
+}
+
+} },
+
+		{field:'link1',title:'Link1',width:150,
+formatter:function(value,row,index){
+link='<a style="color:blue" target="_blank" href="'+value+'">Amazon</a>'
+
+return link},
+
+},
+
+		{field:'price2',title:'Price2',width:100,align:'right',
+		
+		
+		
+		
+		},
+		
+		
+		
+		{field:'price3',title:'Price3',width:100,align:'right'},
+		
+    ]]
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+});
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
